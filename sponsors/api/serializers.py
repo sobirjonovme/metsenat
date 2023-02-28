@@ -4,7 +4,7 @@ from rest_framework.exceptions import ValidationError
 from sponsors.models import Sponsor, JISMONIY, YURIDIK
 
 
-class CreateSponsorSerializer(serializers.ModelSerializer):
+class RegisterSponsorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sponsor
