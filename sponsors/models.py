@@ -34,7 +34,7 @@ class Sponsor(models.Model):
     payment_type = models.CharField(max_length=8, choices=PAYMENT_TYPES, default=MONEY_TRANSFER)
     type = models.CharField(max_length=8, choices=SPONSOR_TYPES, default=JISMONIY)
     status = models.CharField(max_length=8, choices=SPONSOR_STATUS, default=NEW)
-    organization = models.CharField(max_length=128)
+    organization = models.CharField(max_length=128, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
