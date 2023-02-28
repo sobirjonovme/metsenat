@@ -30,7 +30,7 @@ class Sponsor(models.Model):
     full_name = models.CharField(max_length=128)
     phone_number = models.CharField(max_length=13)
     total_money = models.DecimalField(max_digits=12, decimal_places=2)
-    balance = models.DecimalField(max_digits=12, decimal_places=2)
+    spent_money = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     payment_type = models.CharField(max_length=8, choices=PAYMENT_TYPES, default=MONEY_TRANSFER)
     type = models.CharField(max_length=8, choices=SPONSOR_TYPES, default=JISMONIY)
     status = models.CharField(max_length=8, choices=SPONSOR_STATUS, default=NEW)
@@ -43,7 +43,7 @@ class Sponsor(models.Model):
     def __str__(self):
         return self.full_name
 
-    def save(self, *args, **kwargs):
-        if self.id is None:
-            self.balance = self.total_money
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if self.id is None:
+    #         self.balance = self.total_money
+    #     super().save(*args, **kwargs)

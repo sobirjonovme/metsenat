@@ -31,7 +31,7 @@ class SponsorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sponsor
         fields = '__all__'
-        read_only_fields = ('balance', 'created_at', )
+        read_only_fields = ('spent_money', 'created_at', )
         extra_kwargs = {
             'total_money': {'validators': [sp_validators.validate_total_money]}
         }
