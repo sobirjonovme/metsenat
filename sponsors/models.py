@@ -42,3 +42,8 @@ class Sponsor(models.Model):
 
     def __str__(self):
         return self.full_name
+
+    def save(self, *args, **kwargs):
+        if self.id is None:
+            self.balance = self.total_money
+        super().save(*args, **kwargs)
