@@ -16,6 +16,8 @@ class University(models.Model):
 
     class Meta:
         ordering = ['name']
+        verbose_name = 'university'
+        verbose_name_plural = 'universities'
 
     def __str__(self):
         return self.name

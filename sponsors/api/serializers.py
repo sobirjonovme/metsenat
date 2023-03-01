@@ -9,7 +9,7 @@ class RegisterSponsorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sponsor
-        fields = ('full_name', 'phone_number', 'total_money', 'type', 'organization')
+        fields = ('id', 'full_name', 'phone_number', 'total_money', 'type', 'organization')
         extra_kwargs = {
             'total_money': {'validators': [sp_validators.validate_total_money]}
         }
