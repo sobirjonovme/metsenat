@@ -33,7 +33,7 @@ class Student(models.Model):
     )
     type = models.CharField(max_length=2, choices=STUDENT_TYPES, default=BACHELOR)
     tuition_fee = models.DecimalField(max_digits=12, decimal_places=2)
-    received_money = models.DecimalField(max_digits=12, decimal_places=2)
+    received_money = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
