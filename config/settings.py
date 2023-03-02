@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'users',
     'sponsors',
     'students',
+    'sponsorships',
 
 ]
 
