@@ -73,3 +73,18 @@ class SponsorStudentSerializer(serializers.ModelSerializer):
         student.save()
 
         return super().update(instance, validated_data)
+
+
+# DASHBOARD SERIALIZERS
+# Students Statistics
+class DashboardStudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ('full_name', 'created_at')
+
+
+# Students Statistics
+class DashboardSponsorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Sponsor
+        fields = ('full_name', 'created_at')
