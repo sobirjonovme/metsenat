@@ -15,7 +15,7 @@ class SponsorStudentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SponsorStudent
-        fields = ('id', 'sponsor', 'student', 'money_amount', 'money_amount')
+        fields = ('id', 'sponsor', 'sponsor_id', 'student', 'money_amount')
 
     def validate_money_amount(self, value):
         if value < 50_000:
@@ -23,8 +23,10 @@ class SponsorStudentSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        student = get_object_or_404(Student.objects.all(), validated_data['student'])
-        sponsor = get_object_or_404(Sponsor.objects.all(), validated_data['sponsor_id'])
+        print(validated_data)
+        student = validated_data['student']
+        print(123)
+        sponsor = get_object_or_404(Sponsor.objects.all(), id=validated_data['sponsor_id'])
         money_amount = validated_data['money_amount']
 
         # is money amount is valid
@@ -40,6 +42,13 @@ class SponsorStudentSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         student = instance.student
+
+        # Check if student is changed or not
+        if student != validated_data['student']:
+            raise ValidationError({
+                'student': 'You cannot change student!'
+            })
+
         old_sponsor = instance.sponsor
 
         # remove old money amounts from sponsor and user
@@ -54,7 +63,7 @@ class SponsorStudentSerializer(serializers.ModelSerializer):
             old_sponsor.spent_money += money_amount
         else:
             """ If sponsor is also changed """
-            new_sponsor = get_object_or_404(Sponsor.objects.all(), validated_data['sponsor_id'])
+            new_sponsor = get_object_or_404(Sponsor.objects.all(), id=validated_data['sponsor_id'])
             sponsorship_money_validator(new_sponsor, student, money_amount)
             new_sponsor.spent_money += money_amount
             new_sponsor.save()
